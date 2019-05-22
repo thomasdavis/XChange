@@ -5,6 +5,9 @@ import org.knowm.xchange.Exchange;
 import org.knowm.xchange.ExchangeFactory;
 import org.knowm.xchange.ExchangeSpecification;
 
+import org.knowm.xchange.blockbid.service.BlockbidAccountService;
+import org.knowm.xchange.blockbid.service.BlockbidMarketDataService;
+import org.knowm.xchange.blockbid.service.BlockbidTradeService;
 import si.mazi.rescu.SynchronizedValueFactory;
 
 public class BlockbidExchange extends BaseExchange implements Exchange {
@@ -29,6 +32,11 @@ public class BlockbidExchange extends BaseExchange implements Exchange {
 	@Override
 	protected void initServices() {
 		// TODO Auto-generated method stub
-		
+
+//		this.marketDataService = new KrakenMarketDataService(this);
+//		this.tradeService = new KrakenTradeService(this);
+		this.accountService = new BlockbidAccountService(this);
+		this.tradeService = new BlockbidTradeService(this);
+		this.marketDataService = new BlockbidMarketDataService(this);
 	}
 }
