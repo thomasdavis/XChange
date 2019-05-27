@@ -33,7 +33,7 @@ public class BlockbidAccountDataDemo {
         AccountService accountService = blockbidExchange.getAccountService();
 
         raw((BlockbidAccountServiceRaw) accountService);
-        generic(accountService);
+//        generic(accountService);
     }
     private static void raw(BlockbidAccountServiceRaw rawBlockbidAcctService) throws IOException {
 

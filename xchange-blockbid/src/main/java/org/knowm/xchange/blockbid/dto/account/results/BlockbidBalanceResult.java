@@ -29,6 +29,6 @@ public class BlockbidBalanceResult {
     }
     @Override
     public String toString() {
-        return "Market [i";
+        return "Market [i" + this.total + this.currency;
     }
 }

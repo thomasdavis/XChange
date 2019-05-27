@@ -2,11 +2,7 @@ package org.knowm.xchange.blockbid;
 
 import java.io.IOException;
 import java.util.List;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
 import org.knowm.xchange.blockbid.dto.Health;
@@ -18,9 +14,12 @@ import org.knowm.xchange.blockbid.dto.Trade;
 
 
 import org.knowm.xchange.blockbid.dto.marketdata.results.BlockbidTickerResult;
+import org.knowm.xchange.blockbid.dto.marketdata.results.BlockbidTradeResult;
+import org.knowm.xchange.blockbid.dto.marketdata.results.BlockbidOrderBookResult;
 
 @Path("/")
 @Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
 public interface Blockbid {
 	@GET
 	@Path("healthz")
@@ -33,6 +32,15 @@ public interface Blockbid {
 	@GET
 	@Path("tickers/{currencyPair}")
 	List<BlockbidTickerResult> getTicker(@PathParam("currencyPair") String currency) throws IOException;
+
+
+	@GET
+	@Path("trades?market={currencyPair}")
+	List<BlockbidTradeResult> getMarketTrades(@PathParam("currencyPair") String currency) throws IOException;
+
+	@GET
+	@Path("orderbook?market={currencyPair}")
+	BlockbidOrderBookResult getOrderBook(@PathParam("currencyPair") String currency) throws IOException;
 
 //	@GET
 //	@Path("{currencyPair}/ticker.json")

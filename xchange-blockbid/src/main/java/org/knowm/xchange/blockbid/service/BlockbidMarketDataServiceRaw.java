@@ -3,6 +3,7 @@ package org.knowm.xchange.blockbid.service;
 import org.knowm.xchange.Exchange;
 import org.knowm.xchange.blockbid.dto.marketdata.results.BlockbidTickerResult;
 import org.knowm.xchange.blockbid.dto.marketdata.results.BlockbidTradeResult;
+import org.knowm.xchange.blockbid.dto.marketdata.results.BlockbidOrderBookResult;
 import org.knowm.xchange.currency.CurrencyPair;
 import org.knowm.xchange.exceptions.ExchangeException;
 
@@ -29,11 +30,25 @@ public class BlockbidMarketDataServiceRaw extends BlockbidBaseService {
         return tickersResult.get(0);
     }
 
-    public BlockbidTradeResult getBlockbidMarketTrades(String currencyPair) throws IOException {
+    public List<BlockbidTradeResult> getBlockbidMarketTrades(CurrencyPair currencyPair) throws IOException {
+        String market = currencyPair.toString().replace("/", "").toLowerCase();
+        System.out.println("Account Info: " + market);
+
         List<BlockbidTradeResult> marketTradesResult =
-                blockbid.getMarketTrades(currencyPair);
-        return tickersResult.get(0);
+                blockbid.getMarketTrades(market);
+        return marketTradesResult;
     }
+    public BlockbidOrderBookResult getBlockbidOrderBook(CurrencyPair currencyPair)
+            throws IOException {
+        String market = currencyPair.toString().replace("/", "").toLowerCase();
+
+        BlockbidOrderBookResult orderBook = blockbid.getOrderBook(market);
+        System.out.println("what the");
+        System.out.println(orderBook);
+
+        return orderBook;
+    }
+
 //    public BleutradeTicker getBleutradeTicker(CurrencyPair currencyPair) throws IOException {
 //
 //        String pairString = BleutradeUtils.toPairString(currencyPair);

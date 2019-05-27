@@ -31,10 +31,6 @@ public class BlockbidExchange extends BaseExchange implements Exchange {
 
 	@Override
 	protected void initServices() {
-		// TODO Auto-generated method stub
-
-//		this.marketDataService = new KrakenMarketDataService(this);
-//		this.tradeService = new KrakenTradeService(this);
 		this.accountService = new BlockbidAccountService(this);
 		this.tradeService = new BlockbidTradeService(this);
 		this.marketDataService = new BlockbidMarketDataService(this);

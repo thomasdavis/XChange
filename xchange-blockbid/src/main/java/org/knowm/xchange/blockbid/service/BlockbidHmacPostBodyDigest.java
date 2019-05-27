@@ -45,13 +45,20 @@ public class BlockbidHmacPostBodyDigest extends BaseParamsDigest {
         Mac mac = getMac();
         String btoaApikey = Base64.getEncoder().encodeToString(this.apiKey.getBytes());
         String btoaNonce = Base64.getEncoder().encodeToString("111".getBytes());
-        String btoaBody = Base64.getEncoder().encodeToString(postBody.getBytes());
+        System.out.println(postBody);
+
+        String btoaBody = "";
+        if (postBody != null) {
+            btoaBody= Base64.getEncoder().encodeToString(postBody.getBytes());
+        }
+
         String fullUnencodedSignature = btoaApikey + btoaNonce + btoaBody;
         byte[] fullUnencodedSignature2 = fullUnencodedSignature.getBytes();
         mac.update(fullUnencodedSignature2);
 //        String signature = String.format("%096x", new BigInteger(1, mac.doFinal()));
         String signature = Base64.getEncoder().encodeToString(mac.doFinal());
         System.out.println("what is the signature");
+        System.out.println(this.apiKey);
         System.out.println(postBody);
         System.out.println("111");
         System.out.println(btoaNonce);
@@ -66,7 +73,8 @@ public class BlockbidHmacPostBodyDigest extends BaseParamsDigest {
     }
 }
 //package org.knowm.xchange.quoine.service;
-//
+//3jAlbjN4lalLBMS5xrKwtKHJkVNs/03J6JMTf8SpJlNdfMHebH1TKJU0XMAH4oB3
+//EBndN8eBKpnqbbVCM9Y5V+OoLGT/P7RXiHHcjBvvkLH+tatNjcGER7HWHB3C6Us5
 //        import com.auth0.jwt.JWT;
 //        import com.auth0.jwt.JWTCreator;
 //        import com.auth0.jwt.algorithms.Algorithm;
