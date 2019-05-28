@@ -5,15 +5,19 @@ import org.knowm.xchange.blockbid.dto.marketdata.results.BlockbidTradeResult;
 import org.knowm.xchange.blockbid.dto.trade.results.BlockbidLimitOrderResult;
 import org.knowm.xchange.blockbid.dto.trade.results.BlockbidOpenOrderResult;
 import org.knowm.xchange.blockbid.dto.trade.results.BlockbidOrderResult;
+import org.knowm.xchange.currency.Currency;
 import org.knowm.xchange.currency.CurrencyPair;
 import org.knowm.xchange.dto.Order;
 import org.knowm.xchange.dto.marketdata.Trade;
 import org.knowm.xchange.dto.marketdata.Trades;
-import org.knowm.xchange.dto.trade.LimitOrder;
-import org.knowm.xchange.dto.trade.MarketOrder;
-import org.knowm.xchange.dto.trade.OpenOrders;
+import org.knowm.xchange.dto.trade.*;
 import org.knowm.xchange.exceptions.NotAvailableFromExchangeException;
+import org.knowm.xchange.exceptions.NotYetImplementedForExchangeException;
 import org.knowm.xchange.service.trade.TradeService;
+import org.knowm.xchange.service.trade.params.DefaultCancelOrderParamId;
+import org.knowm.xchange.service.trade.params.DefaultTradeHistoryParamCurrencyPair;
+import org.knowm.xchange.service.trade.params.TradeHistoryParamCurrencyPair;
+import org.knowm.xchange.service.trade.params.TradeHistoryParams;
 
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -42,9 +46,27 @@ public class BlockbidTradeService extends BlockbidTradeServiceRaw implements Tra
         List<BlockbidOpenOrderResult> blockbidOpenOrder = getBlockbidOpenOrders(CurrencyPair.BTC_AUD);
         List<LimitOrder> openOrders = new ArrayList<>(blockbidOpenOrder.size());
         for (BlockbidOpenOrderResult bbOpenOrder : blockbidOpenOrder) {
-            openOrders.add(new LimitOrder(Order.OrderType.BID, new BigDecimal("0.11"), CurrencyPair.BTC_AUD, "1", new Date(), new BigDecimal("0.0001")));
+            openOrders.add(new LimitOrder(bbOpenOrder.getSide(), bbOpenOrder.getVolume(), bbOpenOrder.getCurrencyPair(), bbOpenOrder.getId(), new Date(), bbOpenOrder.getPrice()));
         }
         return new OpenOrders(openOrders);
+    }
+
+    public boolean cancelOrder(String orderId) throws IOException {
+        return cancelBlockbidLimitOrder(orderId);
+    }
+
+
+    public UserTrades getTradeHistory(TradeHistoryParams params) throws IOException {
+        CurrencyPair pair = ((TradeHistoryParamCurrencyPair) params).getCurrencyPair();
+        List<BlockbidTradeResult> blockbidTrades = getBlockbidUserTrades(pair);
+        List<UserTrade> trades = new ArrayList<>(blockbidTrades.size());
+        for (BlockbidTradeResult bbTrade : blockbidTrades) {
+            trades.add(new UserTrade(bbTrade.getOrderType(), bbTrade.getOriginalAmount(), bbTrade.getCurrencyPair(),
+                    bbTrade.getPrice(), bbTrade.getTimestamp(), bbTrade.getId(), bbTrade.getOrderId(), new BigDecimal("0"), Currency.AUD));
+        }
+        System.out.println("aaaaaaaaaaaa Info: " + trades);
+
+        return new UserTrades(trades, Trades.TradeSortType.SortByID);
     }
 
 }

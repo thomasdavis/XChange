@@ -16,6 +16,7 @@ import org.knowm.xchange.service.trade.params.DefaultTradeHistoryParamsTimeSpan;
 //import org.slf4j.Logger;
 //import org.slf4j.LoggerFactory;
 //import java.util.logging;
+import java.util.function.Supplier;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.io.IOException;
@@ -32,13 +33,13 @@ public class Xchange {
         Exchange ex = createExchange();
         CurrencyPair pair = new CurrencyPair("BCH", "AUD");
         System.out.println("Order xxxxxxxxxxxxx: ");
-//        showPublicData(ex, pair);
-//        showBalance(ex);
-//        makeLimit(ex,pair);
-//        makeMarket(ex, pair);
-//        showOpenOrders(ex);
-//        cancelOpenOrders(ex);
-//        showHistory(ex, pair);
+        showPublicData(ex, pair);
+        showBalance(ex);
+        makeLimit(ex,pair);
+        makeMarket(ex, pair);
+        showOpenOrders(ex);
+        cancelOpenOrders(ex);
+        showHistory(ex, pair);
 //        showHistoryTimeSpan(ex);
 
     }
@@ -78,7 +79,7 @@ public class Xchange {
             logger.log(Level.ALL,"Balances:",e);
         }
     }
-//
+
     private static void showOpenOrders(Exchange ex) throws IOException {
         System.out.println("Order 12121: ");
 
@@ -90,35 +91,35 @@ public class Xchange {
             logger.log(Level.SEVERE,"showOpenOrders:",e);
         }
     }
-//
-//    private static void cancelOpenOrders(Exchange ex) {
-//        try {
-//            OpenOrders oo = ex.getTradeService().getOpenOrders();
-//            oo.getOpenOrders().forEach(o ->
-//            {
-//                try {
-//                    ex.getTradeService().cancelOrder(o.getId());
-//                } catch (IOException e) {
-//                    logger.error("cancel "+o.getId(),e);
-//                }
-//            });
-//            logger.info("Cancelled: " + oo);
-//        } catch (Exception e){
-//            logger.error("cancelOpenOrders",e);
-//        }
-//
-//    }
-//
-//    private static void showHistory(Exchange ex, CurrencyPair pair){
-//        try {
-//            UserTrades tr = ex.getTradeService().getTradeHistory(new DefaultTradeHistoryParamCurrencyPair(pair));
-//            logger.info("History trades : " + tr.getUserTrades().size());
-//            tr.getUserTrades().forEach( t -> logger.info(t.toString()));
-//        } catch (Exception e){
-//            logger.error("showHistory",e);
-//        }
-//    }
-//
+
+    private static void cancelOpenOrders(Exchange ex) {
+        try {
+            OpenOrders oo = ex.getTradeService().getOpenOrders();
+            oo.getOpenOrders().forEach(o ->
+            {
+                try {
+                    ex.getTradeService().cancelOrder(o.getId());
+                } catch (IOException e) {
+                    logger.log(Level.SEVERE,"cancel "+o.getId(),e);
+                }
+            });
+            logger.info("Cancelled: " + oo);
+        } catch (Exception e){
+            logger.log(Level.SEVERE,"cancelOpenOrders",e);
+        }
+
+    }
+
+    private static void showHistory(Exchange ex, CurrencyPair pair){
+        try {
+            UserTrades tr = ex.getTradeService().getTradeHistory(new DefaultTradeHistoryParamCurrencyPair(pair));
+            logger.info("History trades : " + tr.getUserTrades().size());
+            tr.getUserTrades().forEach( t -> logger.info(t.toString()));
+        } catch (Exception e){
+            logger.log(Level.SEVERE,"showHistory",e);
+        }
+    }
+
     private static void makeLimit(Exchange ex, CurrencyPair pair){
         try {
             String result = ex.getTradeService().placeLimitOrder(new LimitOrder(
@@ -151,14 +152,14 @@ public class Xchange {
         }
     }
 
-//    private static void showHistoryTimeSpan(Exchange ex) {
-//        try {
-//            UserTrades tr = ex.getTradeService().getTradeHistory( new DefaultTradeHistoryParamsTimeSpan(
-//                    new Date(System.currentTimeMillis() - 1000 * 60 * 60 * 24), new Date()));
-//            logger.info("History trades : " + tr.getUserTrades().size());
-//            tr.getUserTrades().forEach( t -> logger.info(t.toString()));
-//        } catch (Exception e){
-//            logger.error("showHistory",e);
-//        }
-//    }
+    private static void showHistoryTimeSpan(Exchange ex) {
+        try {
+            UserTrades tr = ex.getTradeService().getTradeHistory( new DefaultTradeHistoryParamsTimeSpan(
+                    new Date(System.currentTimeMillis() - 1000 * 60 * 60 * 24), new Date()));
+            logger.info("History trades : " + tr.getUserTrades().size());
+            tr.getUserTrades().forEach( t -> logger.info(t.toString()));
+        } catch (Exception e){
+            logger.log(Level.SEVERE,"showHistory",e);
+        }
+    }
 }

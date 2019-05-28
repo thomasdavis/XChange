@@ -40,11 +40,9 @@ public class BlockbidMarketDataService extends BlockbidMarketDataServiceRaw impl
         }
         return new Trades(trades);
     }
-    @Override
+
     public OrderBook getOrderBook(CurrencyPair currencyPair, Object... args) throws IOException {
-
         BlockbidOrderBookResult blockbidOrderbook = getBlockbidOrderBook(currencyPair);
-
         List<LimitOrder> asks = new ArrayList<>();
         for (BlockbidOrderBookAskResult bbAsk : blockbidOrderbook.getAsks()) {
             asks.add(new LimitOrder(Order.OrderType.ASK, bbAsk.getOriginalAmount(), currencyPair, "", new Date(), bbAsk.getLimitPrice()));
@@ -55,4 +53,6 @@ public class BlockbidMarketDataService extends BlockbidMarketDataServiceRaw impl
         }
         return new OrderBook(new Date(), asks, bids);
     }
+
+
 }

@@ -22,6 +22,7 @@ public class BlockbidTradeResult {
     public final BigDecimal originalAmount;
     public final CurrencyPair currencyPair;
     public final BigDecimal price;
+    public final String orderId;
     public Date timestamp;
     public final String id;
     public BlockbidTradeResult(
@@ -30,6 +31,7 @@ public class BlockbidTradeResult {
             @JsonProperty("side") String side,
             @JsonProperty("id") String id,
             @JsonProperty("price") BigDecimal price,
+            @JsonProperty("orderId") String orderId,
             @JsonProperty("volume") BigDecimal volume) {
         this.type = side == "ask" ? OrderType.ASK : OrderType.BID;
 
@@ -43,11 +45,15 @@ public class BlockbidTradeResult {
         }
         this.currencyPair = new CurrencyPair(market.toUpperCase().substring(0, 3) + "/" + market.toUpperCase().substring(3) );
         this.price = price;
+        this.orderId = orderId;
         this.originalAmount = volume;
         this.id = id;
     }
     public OrderType getOrderType () {
         return this.type;
+    }
+    public String getOrderId () {
+        return this.orderId;
     }
     public BigDecimal getOriginalAmount () {
         return this.originalAmount;

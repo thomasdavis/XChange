@@ -99,4 +99,17 @@ public class BlockbidTradeServiceRaw extends BlockbidBaseService {
         }
 
     }
+    public boolean cancelBlockbidLimitOrder(String uuid) throws IOException {
+
+        BlockbidLimitOrderResult cancelledOrder = blockbid.cancelOrder(apiKey, signatureCreator, "111", uuid);
+        return true;
+    }
+    public List<BlockbidTradeResult> getBlockbidUserTrades(CurrencyPair currencyPair) throws IOException {
+        String market = currencyPair.toString().replace("/", "").toLowerCase();
+        System.out.println("Account Info: " + market);
+
+        List<BlockbidTradeResult> marketTradesResult =
+                blockbid.getUserTrades(apiKey, signatureCreator, "111",market);
+        return marketTradesResult;
+    }
 }

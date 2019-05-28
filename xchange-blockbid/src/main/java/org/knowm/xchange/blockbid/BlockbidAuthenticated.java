@@ -7,6 +7,7 @@ import javax.ws.rs.*;
 import org.knowm.xchange.blockbid.dto.account.results.BlockbidBalanceResult;
 import javax.ws.rs.core.MediaType;
 
+import org.knowm.xchange.blockbid.dto.marketdata.results.BlockbidTradeResult;
 import org.knowm.xchange.blockbid.dto.trade.BlockbidOrdersRequest;
 import org.knowm.xchange.blockbid.dto.trade.BlockbidLimitOrdersRequest;
 import org.knowm.xchange.blockbid.dto.trade.results.BlockbidLimitOrderResult;
@@ -57,6 +58,23 @@ public interface BlockbidAuthenticated extends Blockbid {
             @HeaderParam("x-blockbid-nonce") String nonce,
             @PathParam("currencyPair") String market)
             throws IOException;
+    @DELETE
+    @Path("orders/{uuid}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    BlockbidLimitOrderResult cancelOrder(
+            @HeaderParam("x-blockbid-api-key") String apiKey,
+            @HeaderParam("x-blockbid-signature") ParamsDigest signatureCreator,
+            @HeaderParam("x-blockbid-nonce") String nonce,
+            @PathParam("uuid") String uuid)
+            throws IOException;
+    @GET
+    @Path("trades/my?market={currencyPair}")
+    List<BlockbidTradeResult> getUserTrades(
+            @HeaderParam("x-blockbid-api-key") String apiKey,
+            @HeaderParam("x-blockbid-signature") ParamsDigest signatureCreator,
+            @HeaderParam("x-blockbid-nonce") String nonce,
+            @PathParam("currencyPair") String currency) throws IOException;
+
 }
 //  const data = {
 //          market: market,
