@@ -7,15 +7,14 @@ import org.knowm.xchange.blockbid.dto.account.results.BlockbidBalanceResult;
 
 public class BlockbidAccountServiceRaw extends BlockbidBaseService {
 
-    public BlockbidAccountServiceRaw(Exchange exchange) {
+  public BlockbidAccountServiceRaw(Exchange exchange) {
 
-        super(exchange);
-    }
+    super(exchange);
+  }
 
-    public List<BlockbidBalanceResult> getBlockbidBalance() throws IOException {
-        List<BlockbidBalanceResult> balanceResult =
-                blockbid.balances(apiKey, signatureCreator, exchange.getNonceFactory().createValue());
-        return balanceResult;
-
-    }
+  public List<BlockbidBalanceResult> getBlockbidBalance() throws IOException {
+    List<BlockbidBalanceResult> balanceResult =
+        blockbid.balances(apiKey, signatureCreator, exchange.getNonceFactory().createValue());
+    return balanceResult;
+  }
 }

@@ -27,8 +27,7 @@ public class BlockbidExchange extends BaseExchange implements Exchange {
     exchangeSpecification.setHost("https://api.blockbid.io");
     exchangeSpecification.setPort(80);
     exchangeSpecification.setExchangeName("Blockbid");
-    exchangeSpecification.setExchangeDescription(
-        "Blockbid is an Australian crypto exchange");
+    exchangeSpecification.setExchangeDescription("Blockbid is an Australian crypto exchange");
     return exchangeSpecification;
   }
 

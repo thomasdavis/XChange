@@ -5,64 +5,64 @@ import java.math.BigDecimal;
 
 public class GeminiBalancesResponse {
 
-    private final String type;
-    private final String currency;
-    private final BigDecimal amount;
-    private final BigDecimal available;
+  private final String type;
+  private final String currency;
+  private final BigDecimal amount;
+  private final BigDecimal available;
 
-    /**
-     * Constructor
-     *
-     * @param type
-     * @param currency
-     * @param amount
-     * @param available
-     */
-    public GeminiBalancesResponse(
-            @JsonProperty("type") String type,
-            @JsonProperty("currency") String currency,
-            @JsonProperty("amount") BigDecimal amount,
-            @JsonProperty("available") BigDecimal available) {
+  /**
+   * Constructor
+   *
+   * @param type
+   * @param currency
+   * @param amount
+   * @param available
+   */
+  public GeminiBalancesResponse(
+      @JsonProperty("type") String type,
+      @JsonProperty("currency") String currency,
+      @JsonProperty("amount") BigDecimal amount,
+      @JsonProperty("available") BigDecimal available) {
 
-        this.type = type;
-        this.currency = currency;
-        this.amount = amount;
-        this.available = available;
-    }
+    this.type = type;
+    this.currency = currency;
+    this.amount = amount;
+    this.available = available;
+  }
 
-    public BigDecimal getAmount() {
+  public BigDecimal getAmount() {
 
-        return amount;
-    }
+    return amount;
+  }
 
-    public BigDecimal getAvailable() {
+  public BigDecimal getAvailable() {
 
-        return available;
-    }
+    return available;
+  }
 
-    public String getCurrency() {
+  public String getCurrency() {
 
-        return currency;
-    }
+    return currency;
+  }
 
-    public String getType() {
+  public String getType() {
 
-        return type;
-    }
+    return type;
+  }
 
-    @Override
-    public String toString() {
+  @Override
+  public String toString() {
 
-        StringBuilder builder = new StringBuilder();
-        builder.append("GeminiBalancesResponse [type=");
-        builder.append(type);
-        builder.append(", currency=");
-        builder.append(currency);
-        builder.append(", amount=");
-        builder.append(amount);
-        builder.append(", available=");
-        builder.append(available);
-        builder.append("]");
-        return builder.toString();
-    }
+    StringBuilder builder = new StringBuilder();
+    builder.append("GeminiBalancesResponse [type=");
+    builder.append(type);
+    builder.append(", currency=");
+    builder.append(currency);
+    builder.append(", amount=");
+    builder.append(amount);
+    builder.append(", available=");
+    builder.append(available);
+    builder.append("]");
+    return builder.toString();
+  }
 }

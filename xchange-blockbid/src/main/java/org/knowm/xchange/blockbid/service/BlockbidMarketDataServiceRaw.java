@@ -1,49 +1,46 @@
 package org.knowm.xchange.blockbid.service;
 
-import org.knowm.xchange.Exchange;
-import org.knowm.xchange.blockbid.dto.marketdata.results.BlockbidTickerResult;
-import org.knowm.xchange.blockbid.dto.marketdata.results.BlockbidTradeResult;
-import org.knowm.xchange.blockbid.dto.marketdata.results.BlockbidOrderBookResult;
-import org.knowm.xchange.currency.CurrencyPair;
-
 import java.io.IOException;
 import java.util.List;
+import org.knowm.xchange.Exchange;
+import org.knowm.xchange.blockbid.dto.marketdata.results.BlockbidOrderBookResult;
+import org.knowm.xchange.blockbid.dto.marketdata.results.BlockbidTickerResult;
+import org.knowm.xchange.blockbid.dto.marketdata.results.BlockbidTradeResult;
+import org.knowm.xchange.currency.CurrencyPair;
 
 public class BlockbidMarketDataServiceRaw extends BlockbidBaseService {
 
-    public BlockbidMarketDataServiceRaw(Exchange exchange) {
-        super(exchange);
-    }
+  public BlockbidMarketDataServiceRaw(Exchange exchange) {
+    super(exchange);
+  }
 
-    public List<BlockbidTickerResult> getBlockbidTickers() throws IOException {
+  public List<BlockbidTickerResult> getBlockbidTickers() throws IOException {
 
-        List<BlockbidTickerResult> tickersResult =
-                blockbid.getTickers();
+    List<BlockbidTickerResult> tickersResult = blockbid.getTickers();
 
-        return tickersResult;
-    }
+    return tickersResult;
+  }
 
-    public BlockbidTickerResult getBlockbidTicker(String currencyPair) throws IOException {
+  public BlockbidTickerResult getBlockbidTicker(String currencyPair) throws IOException {
 
-        List<BlockbidTickerResult> tickersResult =
-                blockbid.getTicker(currencyPair);
-        return tickersResult.get(0);
-    }
+    List<BlockbidTickerResult> tickersResult = blockbid.getTicker(currencyPair);
+    return tickersResult.get(0);
+  }
 
-    public List<BlockbidTradeResult> getBlockbidMarketTrades(CurrencyPair currencyPair) throws IOException {
-        String market = currencyPair.toString().replace("/", "").toLowerCase();
+  public List<BlockbidTradeResult> getBlockbidMarketTrades(CurrencyPair currencyPair)
+      throws IOException {
+    String market = currencyPair.toString().replace("/", "").toLowerCase();
 
-        List<BlockbidTradeResult> marketTradesResult =
-                blockbid.getMarketTrades(market);
-        return marketTradesResult;
-    }
+    List<BlockbidTradeResult> marketTradesResult = blockbid.getMarketTrades(market);
+    return marketTradesResult;
+  }
 
-    public BlockbidOrderBookResult getBlockbidOrderBook(CurrencyPair currencyPair)
-            throws IOException {
-        String market = currencyPair.toString().replace("/", "").toLowerCase();
+  public BlockbidOrderBookResult getBlockbidOrderBook(CurrencyPair currencyPair)
+      throws IOException {
+    String market = currencyPair.toString().replace("/", "").toLowerCase();
 
-        BlockbidOrderBookResult orderBook = blockbid.getOrderBook(market);
+    BlockbidOrderBookResult orderBook = blockbid.getOrderBook(market);
 
-        return orderBook;
-    }
+    return orderBook;
+  }
 }
