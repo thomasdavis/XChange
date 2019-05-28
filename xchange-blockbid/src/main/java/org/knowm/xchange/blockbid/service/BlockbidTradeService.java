@@ -8,14 +8,9 @@ import org.knowm.xchange.blockbid.dto.trade.results.BlockbidOrderResult;
 import org.knowm.xchange.currency.Currency;
 import org.knowm.xchange.currency.CurrencyPair;
 import org.knowm.xchange.dto.Order;
-import org.knowm.xchange.dto.marketdata.Trade;
 import org.knowm.xchange.dto.marketdata.Trades;
 import org.knowm.xchange.dto.trade.*;
-import org.knowm.xchange.exceptions.NotAvailableFromExchangeException;
-import org.knowm.xchange.exceptions.NotYetImplementedForExchangeException;
 import org.knowm.xchange.service.trade.TradeService;
-import org.knowm.xchange.service.trade.params.DefaultCancelOrderParamId;
-import org.knowm.xchange.service.trade.params.DefaultTradeHistoryParamCurrencyPair;
 import org.knowm.xchange.service.trade.params.TradeHistoryParamCurrencyPair;
 import org.knowm.xchange.service.trade.params.TradeHistoryParams;
 
@@ -43,7 +38,7 @@ public class BlockbidTradeService extends BlockbidTradeServiceRaw implements Tra
     }
     @Override
     public OpenOrders getOpenOrders() throws IOException {
-        List<BlockbidOpenOrderResult> blockbidOpenOrder = getBlockbidOpenOrders(CurrencyPair.BTC_AUD);
+        List<BlockbidOpenOrderResult> blockbidOpenOrder = getBlockbidOpenOrders();
         List<LimitOrder> openOrders = new ArrayList<>(blockbidOpenOrder.size());
         for (BlockbidOpenOrderResult bbOpenOrder : blockbidOpenOrder) {
             openOrders.add(new LimitOrder(bbOpenOrder.getSide(), bbOpenOrder.getVolume(), bbOpenOrder.getCurrencyPair(), bbOpenOrder.getId(), new Date(), bbOpenOrder.getPrice()));
@@ -64,8 +59,6 @@ public class BlockbidTradeService extends BlockbidTradeServiceRaw implements Tra
             trades.add(new UserTrade(bbTrade.getOrderType(), bbTrade.getOriginalAmount(), bbTrade.getCurrencyPair(),
                     bbTrade.getPrice(), bbTrade.getTimestamp(), bbTrade.getId(), bbTrade.getOrderId(), new BigDecimal("0"), Currency.AUD));
         }
-        System.out.println("aaaaaaaaaaaa Info: " + trades);
-
         return new UserTrades(trades, Trades.TradeSortType.SortByID);
     }
 

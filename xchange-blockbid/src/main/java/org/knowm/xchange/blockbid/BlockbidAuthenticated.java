@@ -26,8 +26,10 @@ public interface BlockbidAuthenticated extends Blockbid {
     List<BlockbidBalanceResult> balances(
             @HeaderParam("x-blockbid-api-key") String apiKey,
             @HeaderParam("x-blockbid-signature") ParamsDigest signatureCreator,
-            @HeaderParam("x-blockbid-nonce") String nonce)
+            @HeaderParam("x-blockbid-nonce") Long nonce)
             throws IOException;
+
+
 
     @POST
     @Path("orders")
@@ -35,7 +37,7 @@ public interface BlockbidAuthenticated extends Blockbid {
     List<BlockbidOrderResult> makeMarketOrder(
             @HeaderParam("x-blockbid-api-key") String apiKey,
             @HeaderParam("x-blockbid-signature") ParamsDigest signatureCreator,
-            @HeaderParam("x-blockbid-nonce") String nonce,
+            @HeaderParam("x-blockbid-nonce") Long nonce,
             BlockbidOrdersRequest generateMultiOrders)
             throws IOException;
 
@@ -45,7 +47,7 @@ public interface BlockbidAuthenticated extends Blockbid {
     List<BlockbidLimitOrderResult> placeLimitOrder(
             @HeaderParam("x-blockbid-api-key") String apiKey,
             @HeaderParam("x-blockbid-signature") ParamsDigest signatureCreator,
-            @HeaderParam("x-blockbid-nonce") String nonce,
+            @HeaderParam("x-blockbid-nonce") Long nonce,
             BlockbidLimitOrdersRequest generateMultiOrders)
             throws IOException;
 
@@ -55,16 +57,16 @@ public interface BlockbidAuthenticated extends Blockbid {
     List<BlockbidOpenOrderResult> getOpenOrders(
             @HeaderParam("x-blockbid-api-key") String apiKey,
             @HeaderParam("x-blockbid-signature") ParamsDigest signatureCreator,
-            @HeaderParam("x-blockbid-nonce") String nonce,
-            @PathParam("currencyPair") String market)
+            @HeaderParam("x-blockbid-nonce") Long nonce)
             throws IOException;
+
     @DELETE
     @Path("orders/{uuid}")
     @Consumes(MediaType.APPLICATION_JSON)
     BlockbidLimitOrderResult cancelOrder(
             @HeaderParam("x-blockbid-api-key") String apiKey,
             @HeaderParam("x-blockbid-signature") ParamsDigest signatureCreator,
-            @HeaderParam("x-blockbid-nonce") String nonce,
+            @HeaderParam("x-blockbid-nonce") Long nonce,
             @PathParam("uuid") String uuid)
             throws IOException;
     @GET
@@ -72,36 +74,7 @@ public interface BlockbidAuthenticated extends Blockbid {
     List<BlockbidTradeResult> getUserTrades(
             @HeaderParam("x-blockbid-api-key") String apiKey,
             @HeaderParam("x-blockbid-signature") ParamsDigest signatureCreator,
-            @HeaderParam("x-blockbid-nonce") String nonce,
+            @HeaderParam("x-blockbid-nonce") Long nonce,
             @PathParam("currencyPair") String currency) throws IOException;
 
 }
-//  const data = {
-//          market: market,
-//          orders: [
-//          {
-//          price: price,
-//          side: side,
-//          volume: amount,
-//          orderType: "limit"
-//          }
-//          ]
-//          };
-//        price: price,
-//                side: side,
-//                volume: amount,
-//                orderType: "limit"
-
-//    @POST
-//    @Path("orderbook?market={currencyPair}")
-//    BlockbidOrderBookResult makeMarketOrder(@PathParam("currencyPair") String currency) throws IOException;
-
-
-//    BlockbidBalanceResult balances(
-//            @HeaderParam("x-blockbid-api-key") String apiKey)
-//            throws IOException, BlockbidException;
-
-//    @GET
-//    @Path("balances")
-//    BlockbidBalanceResult balance()
-//            throws IOException;

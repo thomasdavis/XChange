@@ -12,29 +12,21 @@ public class BlockbidOrderRequest {
     @JsonProperty("side")
     protected String side;
 
-    @JsonProperty("orderType")
-    protected String orderType;
-
     public BlockbidOrderRequest(
             BigDecimal volume,
-            String orderType,
             String side) {
 
-        this.volume = new BigDecimal("0.0001");
-        this.orderType = "market";
-        this.side = "sell";
+        this.volume = volume;
+        this.side = side;
     }
     public BigDecimal getVolume () {
         return this.volume;
-    }
-    public String getOrderType () {
-        return this.orderType;
     }
     public String getSide () {
         return this.side;
     }
 
     public String toString() {
-        return "Order " + this.side + this.volume;
+        return "Order: " + this.side + this.volume;
     }
 }

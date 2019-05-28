@@ -25,6 +25,6 @@ public class BlockbidOrderResult {
     }
     @Override
     public String toString() {
-        return "Order " + this.id;
+        return "Order: " + this.id;
     }
 }

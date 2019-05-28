@@ -2,8 +2,6 @@ package org.knowm.xchange.blockbid.dto.account.results;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.math.BigDecimal;
-import java.util.Map;
-import org.knowm.xchange.blockbid.dto.BlockbidResult;
 
 /** @author Benedikt */
 public class BlockbidBalanceResult {

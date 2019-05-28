@@ -8,12 +8,8 @@ import org.knowm.xchange.dto.Order.OrderType;
 import java.text.SimpleDateFormat;
 import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
-import java.util.Date;
-import java.util.Map;
-import org.knowm.xchange.blockbid.dto.BlockbidResult;
 //Trade​(Order.OrderType type, BigDecimal originalAmount, CurrencyPair currencyPair, BigDecimal price,
 // Date timestamp, String id)
 /** @author Benedikt */
@@ -23,6 +19,7 @@ public class BlockbidTradeResult {
     public final CurrencyPair currencyPair;
     public final BigDecimal price;
     public final String orderId;
+    public final String market;
     public Date timestamp;
     public final String id;
     public BlockbidTradeResult(
@@ -48,6 +45,7 @@ public class BlockbidTradeResult {
         this.orderId = orderId;
         this.originalAmount = volume;
         this.id = id;
+        this.market = market;
     }
     public OrderType getOrderType () {
         return this.type;
@@ -72,6 +70,6 @@ public class BlockbidTradeResult {
     }
     @Override
     public String toString() {
-        return "Ticker " + this.timestamp + " " + this.type + " " + this.originalAmount + " " + this.price;
+        return "Trade: " + this.market + " " + this.type + " " + this.originalAmount + " " + this.price;
     }
 }

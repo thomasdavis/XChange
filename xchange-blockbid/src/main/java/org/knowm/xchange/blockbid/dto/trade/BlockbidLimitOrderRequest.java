@@ -12,7 +12,6 @@ public class BlockbidLimitOrderRequest {
     @JsonProperty("side")
     protected String side;
 
-    @JsonProperty("orderType")
     protected String orderType;
 
     @JsonProperty("price")
@@ -20,13 +19,12 @@ public class BlockbidLimitOrderRequest {
 
     public BlockbidLimitOrderRequest(
             BigDecimal volume,
-            String orderType,
             String side,
             BigDecimal price) {
 
-        this.volume = new BigDecimal("0.0001");
+        this.volume = volume;
         this.orderType = "limit";
-        this.side = "buy";
+        this.side = side;
         this.price = price;
     }
     public BigDecimal getVolume () {
@@ -40,6 +38,6 @@ public class BlockbidLimitOrderRequest {
     }
 
     public String toString() {
-        return "Order " + this.side + this.volume;
+        return "Order: " + this.side + this.volume + this.price;
     }
 }

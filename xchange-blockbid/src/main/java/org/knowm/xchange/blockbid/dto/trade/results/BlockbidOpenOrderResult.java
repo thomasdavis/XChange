@@ -5,10 +5,7 @@ import org.knowm.xchange.currency.CurrencyPair;
 import org.knowm.xchange.dto.Order;
 
 import java.math.BigDecimal;
-import java.util.*;
-//Trade​(Order.OrderType type, BigDecimal originalAmount, CurrencyPair currencyPair, BigDecimal price,
-// Date timestamp, String id)
-/** @author Benedikt */
+
 public class BlockbidOpenOrderResult {
     public final BigDecimal price;
     public final BigDecimal volume;
@@ -24,7 +21,6 @@ public class BlockbidOpenOrderResult {
 
         this.price = price;
         this.volume = volume;
-        System.out.println(side);
         this.side = side.equals("buy") ? Order.OrderType.BID : Order.OrderType.ASK;
         this.currencyPair = new CurrencyPair(market.toUpperCase().substring(0, 3) + "/" + market.toUpperCase().substring(3) );
         this.id = id;
@@ -44,8 +40,9 @@ public class BlockbidOpenOrderResult {
     public String getId () {
         return this.id;
     }
+
     @Override
     public String toString() {
-        return "Order " + this.id;
+        return "Order: " + this.id;
     }
 }

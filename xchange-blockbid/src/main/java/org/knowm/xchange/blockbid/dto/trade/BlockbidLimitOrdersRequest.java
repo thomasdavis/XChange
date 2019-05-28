@@ -13,11 +13,10 @@ public class BlockbidLimitOrdersRequest {
     @JsonProperty("market")
     protected String market;
 
-    public BlockbidLimitOrdersRequest(
-            BlockbidLimitOrderRequest[] orders) {
+    public BlockbidLimitOrdersRequest(String market, BlockbidLimitOrderRequest[] orders) {
 
         this.orders = orders;
-        this.market = "bchaud";
+        this.market = market;
     }
 
     public BlockbidLimitOrderRequest[] getOrders() {

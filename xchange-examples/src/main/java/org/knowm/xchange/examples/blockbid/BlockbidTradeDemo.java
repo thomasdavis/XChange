@@ -30,9 +30,9 @@ public class BlockbidTradeDemo {
     private static void raw(BlockbidTradeServiceRaw rawBlockbidTradeService) throws IOException {
         System.out.println(rawBlockbidTradeService.makeBlockbidMarketOrder(currencyPair, "buy", new BigDecimal("0.000001")));
         System.out.println(rawBlockbidTradeService.placeBlockbidLimitOrder(currencyPair, "buy", new BigDecimal("0.000001"), new BigDecimal("2")));
-        System.out.println(rawBlockbidTradeService.getBlockbidOpenOrders(currencyPair));
+        System.out.println(rawBlockbidTradeService.getBlockbidOpenOrders());
         System.out.println(rawBlockbidTradeService.getBlockbidUserTrades(currencyPair));
-        System.out.println(rawBlockbidTradeService.cancelBlockbidLimitOrder("31508300"));
+        System.out.println(rawBlockbidTradeService.cancelBlockbidLimitOrder("31574929"));
     }
 
     private static void generic(TradeService tradeService) throws IOException {
