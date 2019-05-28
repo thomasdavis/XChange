@@ -20,8 +20,8 @@ public class BlockbidTradeDemo {
     private static CurrencyPair currencyPair = CurrencyPair.BTC_AUD;
     public static void main(String[] args) throws IOException {
         ExchangeSpecification exSpec = new BlockbidExchange().getDefaultExchangeSpecification();
-        exSpec.setApiKey("73ad46e4-a0f9-4b57-95b2-1d591a11b0fb");
-        exSpec.setSecretKey("CAzrrR8uzz+GwYnWZbv9fQz0IGig62KufBdNMxXRfCfniIs6sYoi8k5wLYqN4MqB6cJXDUR+AduefSv6aDUpyw==");
+        exSpec.setApiKey("xxx");
+        exSpec.setSecretKey("xxx");
         Exchange blockbidExchange = ExchangeFactory.INSTANCE.createExchange(exSpec);
         TradeService tradeService = blockbidExchange.getTradeService();
         raw((BlockbidTradeServiceRaw) tradeService);

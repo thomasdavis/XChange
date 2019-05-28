@@ -14,8 +14,8 @@ public class BlockbidMarketDataDemo {
     private static CurrencyPair currencyPair = CurrencyPair.BTC_AUD;
     public static void main(String[] args) throws IOException {
         ExchangeSpecification exSpec = new BlockbidExchange().getDefaultExchangeSpecification();
-        exSpec.setApiKey("11762e7c-fc4f-4675-8b68-2fdc0573ea3f");
-        exSpec.setSecretKey("USaQxCPeZgO/DO6vJIW/g8xKTwq+0eD40jMejeVxNzsgVOv3XKpwlpHuu/iUFBluNyx1msVHe1vgS+IFGO601A==");
+        exSpec.setApiKey("xxx");
+        exSpec.setSecretKey("xxx");
         Exchange blockbidExchange = ExchangeFactory.INSTANCE.createExchange(exSpec);
 
         MarketDataService marketDataService = blockbidExchange.getMarketDataService();
